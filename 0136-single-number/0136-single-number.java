@@ -1,16 +1,14 @@
 class Solution {
     public int singleNumber(int[] nums) {
         Arrays.sort(nums);
-         Set<Integer> set = new HashSet<>();
-         int i=0;
-         while(i<nums.length){
-            if(set.contains(nums[i])) {
-                set.remove(nums[i]);
-            
-            }
-            else set.add(nums[i]);
-            i++;
+         Map<Integer,Integer> map = new HashMap<>();
+         for(int num : nums){
+            map.put(num,map.getOrDefault(num,0)+1);
          }
-        return set.iterator().next();
+         for(int ele : nums) {
+            if(map.get(ele)==1) return ele;
+         }
+         return -1;
+        
     }
 }
