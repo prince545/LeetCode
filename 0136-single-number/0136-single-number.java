@@ -1,9 +1,16 @@
 class Solution {
     public int singleNumber(int[] nums) {
         Arrays.sort(nums);
-        for(int i=0;i<nums.length-1;i=i+2){
-            if(nums[i]!=nums[i+1])  return nums[i];
-        }
-        return nums[nums.length-1];
+         Set<Integer> set = new HashSet<>();
+         int i=0;
+         while(i<nums.length){
+            if(set.contains(nums[i])) {
+                set.remove(nums[i]);
+            
+            }
+            else set.add(nums[i]);
+            i++;
+         }
+        return set.iterator().next();
     }
 }
