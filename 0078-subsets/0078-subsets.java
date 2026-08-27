@@ -2,27 +2,19 @@
 
 class Solution {
 
-    public static void fun(ArrayList<Integer> list, int[] nums, int idx, List<List<Integer>> ans) {
-
-        if(idx == nums.length){
-            ans.add(new ArrayList<>(list));
-            return;
-        }
-
-        // include
-        list.add(nums[idx]);
-        fun(list, nums, idx+1, ans);
-
-        // backtrack
-        list.remove(list.size()-1);
-
-        // exclude
-        fun(list, nums, idx+1, ans);
-    }
-
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        fun(new ArrayList<Integer>(), nums, 0, ans);
+        int n = nums.length;
+        int m = 1<<n;
+                List<List<Integer>> ans = new ArrayList<>();
+                for(int i=0;i<m;i++){
+                            List<Integer> dum = new ArrayList<>();
+                            for(int j=0;j<n;j++){
+                                if((i>>j)%2==1) dum.add(nums[j]);
+                            }
+                            ans.add(dum);
+
+                }
+
         return ans;
     }
 }
