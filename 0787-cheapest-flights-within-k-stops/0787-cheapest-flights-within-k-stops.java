@@ -1,6 +1,6 @@
 
 class Solution {
-     class Triplet implements Comparable<Triplet>{
+     class Triplet{
     int node;
     int cost;
     int stops;
@@ -9,10 +9,7 @@ class Solution {
         this.cost = cost;
         this.stops = stops;
     }
-    public int compareTo(Triplet t){
-        if(this.stops == t.stops) return this.cost - t.cost;
-    return this.stops - t.stops;
-    }
+    
 
 }
 
@@ -37,10 +34,10 @@ class Solution {
         Arrays.fill(ans,Integer.MAX_VALUE);
         ans[src] = 0;
 
-        PriorityQueue<Triplet> pq = new PriorityQueue<>();
-        pq.add(new Triplet(src,0,0));
-        while(pq.size()>0){
-            Triplet top = pq.remove();
+        Queue<Triplet> q = new LinkedList<>();
+        q.add(new Triplet(src,0,0));
+        while(q.size()>0){
+            Triplet top = q.remove();
             int node = top.node, cost = top.cost, stops = top.stops;
 
             if(stops == k+1) continue;
@@ -48,7 +45,7 @@ class Solution {
                 int totalCost = cost + p.cost;
                 if(totalCost < ans[p.node]){
                     ans[p.node] = totalCost;
-                    pq.add(new Triplet(p.node,totalCost,stops+1));
+                    q.add(new Triplet(p.node,totalCost,stops+1));
                 }
             }
 
